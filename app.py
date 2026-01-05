@@ -37,7 +37,16 @@ tab1, tab2, tab3 = st.tabs(["Productivity Predictor", "Attrition Risk", "Task Re
 # --- Tab 1: Productivity Predictor ---
 with tab1:
     st.header("Productivity Predictor (RQ1)")
-    st.write("Predicts employee productivity levels in distributed work settings.")
+    st.markdown("""
+    **Goal:** Predict employee productivity levels in distributed work settings.
+    
+    **Model & Algorithm:** 
+    - **Algorithm:** Random Forest Classifier
+    - **Input:** Work hours, meeting load, remote days, and well-being score.
+    - **Output:** Classification into 'High', 'Medium', or 'Low' productivity.
+    
+    **Dataset:** [Remote Work Productivity Dataset (Kaggle)](https://www.kaggle.com/datasets/melodyyiphoiching/remote-working-survey)
+    """)
     
     # Load Data for Viz
     df_prod = pd.read_csv('Productivity_Predictor/data/remote_work_productivity.csv')
@@ -51,7 +60,7 @@ with tab1:
     with col2:
         st.subheader("Productivity Distribution")
         fig, ax = plt.subplots()
-        sns.countplot(data=df_prod, x='Productivity_Score', ax=ax, palette="viridis")
+        sns.countplot(data=df_prod, x='Productivity_Score', hue='Productivity_Score', ax=ax, palette="viridis", legend=False)
         st.pyplot(fig)
 
     st.divider()
@@ -80,7 +89,16 @@ with tab1:
 # --- Tab 2: Attrition Risk ---
 with tab2:
     st.header("Attrition Risk Model (RQ2)")
-    st.write("Identifies employees at risk of leaving to improve organizational resilience.")
+    st.markdown("""
+    **Goal:** Identify employees at risk of leaving to improve organizational resilience.
+    
+    **Model & Algorithm:**
+    - **Algorithm:** Logistic Regression (with Standardization)
+    - **Input:** Age, daily rate, distance from home, education, satisfaction scores, etc.
+    - **Output:** Probability of attrition (Yes/No).
+    
+    **Dataset:** [IBM HR Analytics Employee Attrition & Performance (Kaggle)](https://www.kaggle.com/datasets/pavansubhasht/ibm-hr-analytics-attrition-dataset)
+    """)
     
     df_att = pd.read_csv('Attrition_Risk_Model/data/ibm_hr_attrition.csv')
     
@@ -128,7 +146,16 @@ with tab2:
 # --- Tab 3: Task Recommender ---
 with tab3:
     st.header("Task Recommender (RQ3)")
-    st.write("Classifies tasks for Human-AI Collaboration: Automate, Augment, or Human-Only.")
+    st.markdown("""
+    **Goal:** Classify tasks for Human-AI Collaboration: Automate, Augment, or Human-Only.
+    
+    **Model & Algorithm:**
+    - **Algorithm:** Multinomial Naive Bayes (NLP)
+    - **Input:** Task description text.
+    - **Output:** Recommendation category (Automate, Augment, Human-Only).
+    
+    **Dataset:** [O*NET Database (Department of Labor)](https://www.onetonline.org/) (Adapted for Task Classification)
+    """)
     
     df_task = pd.read_csv('Task_Recommender/data/task_data.csv')
     
@@ -139,7 +166,7 @@ with tab3:
     with col2:
         st.subheader("Task Category Distribution")
         fig, ax = plt.subplots()
-        sns.countplot(y='Category', data=df_task, ax=ax, palette="magma")
+        sns.countplot(y='Category', data=df_task, hue='Category', ax=ax, palette="magma", legend=False)
         st.pyplot(fig)
         
     st.divider()
